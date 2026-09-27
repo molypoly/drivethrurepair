@@ -262,8 +262,8 @@ main section h2 {
 
 @media (min-width: 780px) {
   .steps {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
     padding-top: 2rem;
     border-top: 1px solid var(--line);
   }
