@@ -334,6 +334,60 @@ main section h2 {
   color: var(--muted);
 }
 
+/* Parts tiers --------------------------------------------------------------- */
+.parts-intro {
+  margin-top: -1.5rem;
+  margin-bottom: 2rem;
+  color: var(--muted);
+}
+
+.tier-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 720px) {
+  .tier-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.tier-card {
+  border: 1px solid var(--line);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tier-photo {
+  aspect-ratio: 4 / 3;
+  background: var(--bg-raised);
+  border: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.tier-card h3 {
+  font-size: 1.15rem;
+}
+
+.tier-def {
+  color: var(--muted);
+}
+
+.parts-note {
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  max-width: 68ch;
+}
+
 /* Quote cards ------------------------------------------------------------ */
 .quote-cards {
   display: grid;
@@ -368,9 +422,9 @@ main section h2 {
 
 .quote-card-toggle {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
   width: 100%;
   padding: 1.1rem 1.25rem;
   background: transparent;
