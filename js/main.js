@@ -91,5 +91,30 @@ function initRepairForm() {
   });
 }
 
+function initThemeToggle() {
+  const toggle = document.getElementById('theme-toggle');
+  if (!toggle) return;
+
+  const root = document.documentElement;
+
+  const updateLabel = () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  };
+  updateLabel();
+
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    updateLabel();
+    try {
+      localStorage.setItem('theme', next);
+    } catch (err) {
+      // Private browsing or storage disabled — theme just won't persist.
+    }
+  });
+}
+
 initQuoteCards();
 initRepairForm();
+initThemeToggle();

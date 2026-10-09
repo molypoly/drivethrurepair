@@ -8,7 +8,7 @@
   --bg: #f6f4ee;
   --bg-raised: #eeeadc;
   --fg: #17160f;
-  --muted: rgba(23, 22, 15, 0.72);
+  --muted: rgba(23, 22, 15, 0.85);
   --line: rgba(23, 22, 15, 0.22);
   --line-strong: rgba(23, 22, 15, 0.4);
   --accent: #ffc300;
@@ -21,6 +21,27 @@
   --header-h: 72px;
 
   --font: 'Archivo', system-ui, sans-serif;
+
+  color-scheme: light;
+}
+
+/* Dark mode — same amber accent, inverted near-black/cream base.
+   [data-theme] is set on <html> before first paint by an inline script
+   in index.html (reads localStorage, falls back to the OS preference),
+   so this is the single source of truth — no @media duplicate needed. */
+:root[data-theme='dark'] {
+  --bg: #17160f;
+  --bg-raised: #231f16;
+  --fg: #f6f4ee;
+  --muted: rgba(246, 244, 238, 0.72);
+  --line: rgba(246, 244, 238, 0.22);
+  --line-strong: rgba(246, 244, 238, 0.4);
+  --accent: #ffc300;
+  --accent-ink: #17160f;
+  --accent-strong: #ffc300;
+  --accent-wash: rgba(255, 195, 0, 0.14);
+
+  color-scheme: dark;
 }
 
 /* Reset --------------------------------------------------------------- */
@@ -43,6 +64,7 @@ body {
   font-family: var(--font);
   font-weight: 400;
   line-height: 1.5;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 img,
@@ -174,6 +196,46 @@ h3 {
   color: var(--accent-strong);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--fg);
+}
+
+.theme-toggle svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.theme-toggle .icon-sun {
+  display: none;
+}
+
+:root[data-theme='dark'] .theme-toggle .icon-moon {
+  display: none;
+}
+
+:root[data-theme='dark'] .theme-toggle .icon-sun {
+  display: block;
+}
+
 @media (min-width: 480px) {
   .site-header .wrap {
     gap: 1.5rem;
@@ -187,10 +249,25 @@ h3 {
 }
 
 /* Below 480px, the full wordmark + "Book now" no longer fit on one line —
-   shrink the logo and swap to a shorter button label instead of wrapping. */
+   shrink the logo, the toggle, and swap to a shorter button label instead
+   of wrapping. */
 @media (max-width: 479px) {
   .logo {
     font-size: 0.8rem;
+  }
+
+  .header-actions {
+    gap: 0.4rem;
+  }
+
+  .theme-toggle {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+
+  .theme-toggle svg {
+    width: 1rem;
+    height: 1rem;
   }
 
   .site-header .btn-cta {
@@ -204,6 +281,33 @@ h3 {
 
   .site-header .btn-label-short {
     display: inline;
+  }
+}
+
+/* Narrowest phones (≈320px) still came up short with the toggle added —
+   trim a little further rather than touching the 480px tier above. */
+@media (max-width: 346px) {
+  .logo {
+    font-size: 0.68rem;
+  }
+
+  .header-actions {
+    gap: 0.3rem;
+  }
+
+  .theme-toggle {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+
+  .theme-toggle svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  .site-header .btn-cta {
+    padding: 0.6rem 0.7rem;
+    font-size: 0.72rem;
   }
 }
 

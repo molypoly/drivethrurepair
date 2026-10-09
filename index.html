@@ -10,6 +10,12 @@
     />
     <link rel="canonical" href="https://drivethrurepair.ca/" />
 
+    <link rel="icon" href="/favicon-circle.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-circle-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-circle-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-circle-180.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-circle-512.png" />
+
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://drivethrurepair.ca/" />
     <meta property="og:locale" content="en_CA" />
@@ -19,8 +25,12 @@
       property="og:description"
       content="We pick up your phone or tablet, repair it, and bring it back. Screens, batteries, charging ports, cameras, back glass, console cleaning. Serving Kelowna, West Kelowna, Lake Country, Rutland, Glenmore and Mission."
     />
+    <meta property="og:image" content="https://drivethrurepair.ca/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://drivethrurepair.ca/og-image.png" />
     <meta name="twitter:title" content="Drive Thru Tech Repairs — Mobile Tech Repair in Kelowna, BC" />
     <meta
       name="twitter:description"
@@ -34,6 +44,26 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/style.css" />
+
+    <script>
+      // Set the theme before first paint so there's no flash of the wrong
+      // mode: an explicit choice saved earlier wins, otherwise fall back to
+      // what the device/browser already prefers.
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var theme =
+            saved === 'light' || saved === 'dark'
+              ? saved
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (err) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
 
     <script type="application/ld+json">
       {
@@ -75,9 +105,32 @@
           <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a href="#contact" class="btn btn-cta"
-          ><span class="btn-label-full">Book now</span><span class="btn-label-short">Book</span></a
-        >
+        <div class="header-actions">
+          <button
+            type="button"
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Switch to dark mode"
+          >
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M20.4 14.7c-1.1.5-2.3.8-3.6.8-4.7 0-8.5-3.8-8.5-8.5 0-1.3.3-2.5.8-3.6-3.9 1.1-6.8 4.7-6.8 9 0 5.2 4.2 9.4 9.4 9.4 4.3 0 7.9-2.9 9-6.8-.1 0-.2.1-.3.1z"
+              />
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.5" />
+              <path
+                d="M12 2v2.5M12 19.5V22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2 12h2.5M19.5 12H22M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+          <a href="#contact" class="btn btn-cta"
+            ><span class="btn-label-full">Book now</span><span class="btn-label-short">Book</span></a
+          >
+        </div>
       </div>
     </header>
 
