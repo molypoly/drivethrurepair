@@ -62,6 +62,10 @@
         } catch (err) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
+        // Flag JS as available before first paint, so the scroll-reveal
+        // CSS (which hides .reveal elements until they scroll into view)
+        // only applies when there's JS around to actually reveal them.
+        document.documentElement.classList.add('js');
       })();
     </script>
 
@@ -181,7 +185,7 @@
       </section>
 
       <section class="how" id="how-it-works">
-        <div class="wrap">
+        <div class="wrap reveal">
           <h2>How it works</h2>
           <ol class="steps">
             <li>
@@ -212,7 +216,7 @@
       </section>
 
       <section class="services" id="services">
-        <div class="wrap">
+        <div class="wrap reveal">
           <h2>What we fix</h2>
           <p class="services-intro">Hover a repair for details, then request your quote.</p>
 
@@ -469,7 +473,7 @@
       </section>
 
       <section class="parts" id="parts">
-        <div class="wrap">
+        <div class="wrap reveal">
           <h2>Know your parts</h2>
           <p class="parts-intro">
             Not every replacement part is the same. Here's what each tier means,
@@ -524,7 +528,7 @@
       </section>
 
       <section class="area" id="service-area">
-        <div class="wrap">
+        <div class="wrap reveal">
           <h2>Service area</h2>
           <p>Based in Kelowna — we pick up and drop off throughout:</p>
           <ul class="area-list">
@@ -539,7 +543,7 @@
       </section>
 
       <section class="faq" id="faq">
-        <div class="wrap">
+        <div class="wrap reveal">
           <h2>Questions</h2>
           <div class="faq-list">
             <details class="faq-item">
@@ -590,7 +594,7 @@
       </section>
 
       <section class="contact" id="contact">
-        <div class="wrap">
+        <div class="wrap reveal">
           <h2>Get your phone or tablet fixed</h2>
           <p>
             Tell us what's wrong and where you are, we'll get back to you

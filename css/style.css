@@ -53,7 +53,6 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
   scroll-padding-top: var(--header-h);
 }
 
@@ -65,6 +64,27 @@ body {
   font-weight: 400;
   line-height: 1.5;
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Motion — smooth anchor scrolling and scroll-triggered section reveals.
+   Both are gated behind prefers-reduced-motion, and the reveal is also
+   gated behind a .js class set before first paint: if JS is unavailable
+   the .reveal elements never get hidden in the first place. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .js .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 img,
