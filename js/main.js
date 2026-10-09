@@ -115,6 +115,62 @@ function initThemeToggle() {
   });
 }
 
+function initNavToggle() {
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+
+  const closeMenu = () => {
+    nav.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+  };
+
+  const openMenu = () => {
+    nav.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close menu');
+  };
+
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.contains('is-open');
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  // Anchor links close the menu themselves once tapped.
+  nav.addEventListener('click', (event) => {
+    if (event.target.closest('a')) closeMenu();
+  });
+
+  // Escape, or a tap/click outside the open menu, closes it too.
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && nav.classList.contains('is-open')) closeMenu();
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!nav.classList.contains('is-open')) return;
+    if (nav.contains(event.target) || toggle.contains(event.target)) return;
+    closeMenu();
+  });
+
+  // Resizing past the mobile breakpoint (e.g. rotating a tablet, or a
+  // desktop window resize during testing) shouldn't leave a stale open
+  // dropdown state hanging around once the inline nav takes over.
+  const desktopQuery = window.matchMedia('(min-width: 1020px)');
+  const handleBreakpointChange = (e) => {
+    if (e.matches) closeMenu();
+  };
+  if (desktopQuery.addEventListener) {
+    desktopQuery.addEventListener('change', handleBreakpointChange);
+  } else {
+    desktopQuery.addListener(handleBreakpointChange);
+  }
+}
+
 function initScrollReveal() {
   const revealEls = document.querySelectorAll('.reveal');
   if (!revealEls.length) return;
@@ -144,4 +200,5 @@ function initScrollReveal() {
 initQuoteCards();
 initRepairForm();
 initThemeToggle();
+initNavToggle();
 initScrollReveal();

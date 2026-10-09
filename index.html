@@ -101,7 +101,7 @@
     <header class="site-header">
       <div class="wrap">
         <a href="#top" class="logo">Drive Thru<span> Tech Repairs</span></a>
-        <nav class="site-nav" aria-label="Primary">
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
           <a href="#how-it-works">How it works</a>
           <a href="#services">Services</a>
           <a href="#parts">Parts</a>
@@ -129,6 +129,37 @@
                 stroke-width="1.6"
                 stroke-linecap="round"
               />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="nav-toggle"
+            id="nav-toggle"
+            aria-expanded="false"
+            aria-controls="site-nav"
+            aria-label="Open menu"
+          >
+            <svg
+              class="icon-menu"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M3 6h18M3 12h18M3 18h18" />
+            </svg>
+            <svg
+              class="icon-close"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M5 5l14 14M19 5L5 19" />
             </svg>
           </button>
           <a href="#contact" class="btn btn-cta"
@@ -264,7 +295,7 @@
               </button>
               <div class="quote-card-details">
                 <p class="quote-card-blurb">
-                  Flex-cable connector swap for most iPhones and mainstream Galaxy S-series
+                  Flex-cable connector swap for iPhone, Samsung Galaxy, Pixel, and OnePlus
                   — no soldering.
                 </p>
                 <a
@@ -683,8 +714,35 @@
     </main>
 
     <footer class="site-footer">
-      <div class="wrap">
+      <div class="wrap footer-grid">
+        <div class="footer-brand">
+          <p class="footer-logo">Drive Thru<span> Tech Repairs</span></p>
+          <p class="footer-tagline">
+            Pick-up &amp; drop-off phone and tablet repair, Kelowna, BC.
+          </p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="#how-it-works">How it works</a>
+          <a href="#services">Services</a>
+          <a href="#parts">Parts</a>
+          <a href="#service-area">Service area</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="footer-contact">
+          <a href="mailto:drivethrurepair.bc@gmail.com">drivethrurepair.bc@gmail.com</a>
+          <p>Kelowna, West Kelowna, Lake Country, Rutland, Glenmore &amp; Mission</p>
+        </div>
+      </div>
+
+      <div class="wrap footer-bottom">
         <p>© 2026 Drive Thru Tech Repairs. Kelowna, BC.</p>
+        <p class="footer-credit">
+          Built by
+          <a href="https://digitizeokanagan.com" target="_blank" rel="noopener">Digitize Okanagan</a>
+        </p>
       </div>
     </footer>
 

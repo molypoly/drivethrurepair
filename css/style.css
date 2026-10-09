@@ -216,6 +216,66 @@ h3 {
   color: var(--accent-strong);
 }
 
+/* Mobile dropdown state — toggled by #nav-toggle below 1020px. Positioned
+   relative to .site-header (sticky counts as a positioning context), so
+   it drops down as a full-width panel right under the header. */
+.site-nav.is-open {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding-inline: var(--gutter);
+  padding-block: 0.25rem;
+}
+
+.site-nav.is-open a {
+  padding-block: 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.site-nav.is-open a:last-child {
+  border-bottom: none;
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  border-color: var(--fg);
+}
+
+.nav-toggle svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.nav-toggle .icon-close {
+  display: none;
+}
+
+.nav-toggle[aria-expanded='true'] .icon-menu {
+  display: none;
+}
+
+.nav-toggle[aria-expanded='true'] .icon-close {
+  display: block;
+}
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -256,22 +316,45 @@ h3 {
   display: block;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 555px) {
   .site-header .wrap {
     gap: 1.5rem;
   }
 }
 
-@media (min-width: 860px) {
+/* 1020px rather than a rounder number: the inline nav + logo + actions
+   don't actually fit until right around here — measured empirically,
+   since the full six-link nav plus the header buttons is wider than it
+   looks. Below this, the hamburger menu covers it instead. */
+@media (min-width: 1020px) {
   .site-nav {
     display: flex;
   }
+
+  .site-nav.is-open {
+    position: static;
+    flex-direction: row;
+    gap: 2rem;
+    background: none;
+    border-bottom: none;
+    padding: 0;
+  }
+
+  .site-nav.is-open a {
+    padding-block: 0;
+    border-bottom: none;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
 }
 
-/* Below 480px, the full wordmark + "Book now" no longer fit on one line —
-   shrink the logo, the toggle, and swap to a shorter button label instead
-   of wrapping. */
-@media (max-width: 479px) {
+/* Below 555px, the full wordmark + "Book now" + the extra nav-toggle
+   button no longer fit on one line — shrink the logo, the toggles, and
+   swap to a shorter button label instead of wrapping. (Threshold moved
+   up from 480px once the hamburger button added a third item to fit.) */
+@media (max-width: 554px) {
   .logo {
     font-size: 0.8rem;
   }
@@ -280,12 +363,14 @@ h3 {
     gap: 0.4rem;
   }
 
-  .theme-toggle {
+  .theme-toggle,
+  .nav-toggle {
     width: 2.1rem;
     height: 2.1rem;
   }
 
-  .theme-toggle svg {
+  .theme-toggle svg,
+  .nav-toggle svg {
     width: 1rem;
     height: 1rem;
   }
@@ -304,30 +389,62 @@ h3 {
   }
 }
 
-/* Narrowest phones (≈320px) still came up short with the toggle added —
-   trim a little further rather than touching the 480px tier above. */
-@media (max-width: 346px) {
+/* A middle tier for the gap a plain two-value jump leaves behind —
+   phones in the ~347-384px range have more room than the narrowest
+   tier below needs, but less than the 554px tier above assumes. */
+@media (max-width: 384px) {
   .logo {
-    font-size: 0.68rem;
+    font-size: 0.7rem;
   }
 
   .header-actions {
     gap: 0.3rem;
   }
 
-  .theme-toggle {
-    width: 1.9rem;
-    height: 1.9rem;
+  .theme-toggle,
+  .nav-toggle {
+    width: 2rem;
+    height: 2rem;
   }
 
-  .theme-toggle svg {
-    width: 0.9rem;
-    height: 0.9rem;
+  .theme-toggle svg,
+  .nav-toggle svg {
+    width: 0.95rem;
+    height: 0.95rem;
   }
 
   .site-header .btn-cta {
-    padding: 0.6rem 0.7rem;
-    font-size: 0.72rem;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.73rem;
+  }
+}
+
+/* Narrowest phones (≈300-346px) still came up short with the toggle
+   added — trim further rather than touching the tiers above. */
+@media (max-width: 346px) {
+  .logo {
+    font-size: 0.56rem;
+  }
+
+  .header-actions {
+    gap: 0.18rem;
+  }
+
+  .theme-toggle,
+  .nav-toggle {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  .theme-toggle svg,
+  .nav-toggle svg {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .site-header .btn-cta {
+    padding: 0.55rem 0.6rem;
+    font-size: 0.68rem;
   }
 }
 
@@ -888,11 +1005,101 @@ main section h2 {
 
 /* Footer ----------------------------------------------------------------- */
 .site-footer {
-  padding-block: 2rem;
+  padding-block: 1.75rem 1rem;
   background: var(--bg-raised);
+  border-top: 1px solid var(--line);
 }
 
-.site-footer p {
+.footer-grid {
+  display: grid;
+  gap: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.footer-logo {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  font-size: 1.1rem;
+}
+
+.footer-logo span {
+  color: var(--accent-strong);
+}
+
+.footer-tagline {
+  margin-top: 0.35rem;
   color: var(--muted);
   font-size: 0.85rem;
+  max-width: 28ch;
+}
+
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-auto-flow: column;
+  grid-template-rows: repeat(3, auto);
+  column-gap: 1.5rem;
+  row-gap: 0.4rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.footer-nav a:hover {
+  color: var(--accent-strong);
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.footer-contact a {
+  font-weight: 700;
+}
+
+.footer-contact a:hover {
+  color: var(--accent-strong);
+}
+
+.footer-contact p {
+  color: var(--muted);
+  max-width: 32ch;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.footer-bottom p {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.footer-credit a {
+  color: #c4622d;
+  text-decoration: underline;
+}
+
+.footer-credit a:hover {
+  color: #c4622d;
+  opacity: 0.8;
+}
+
+@media (min-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1.3fr 1fr 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
