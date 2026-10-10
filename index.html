@@ -642,6 +642,7 @@
             id="repair-form"
           >
             <input type="hidden" name="form-name" value="repair-request" />
+            <input type="hidden" name="subject" value="New repair request" />
             <p class="repair-form-honeypot" hidden>
               <label>Leave this field blank: <input name="bot-field" /></label>
             </p>
@@ -653,7 +654,17 @@
 
             <div class="form-row">
               <label for="rf-phone">Phone</label>
-              <input type="tel" id="rf-phone" name="phone" required />
+              <input
+                type="tel"
+                id="rf-phone"
+                name="phone"
+                inputmode="numeric"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                placeholder="2505551234"
+                title="10-digit phone number, numbers only"
+                required
+              />
             </div>
 
             <div class="form-row">

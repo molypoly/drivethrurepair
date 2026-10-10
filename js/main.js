@@ -62,8 +62,33 @@ function initRepairForm() {
 
   const status = form.querySelector('[data-form-status]');
 
+  // Phone field — strip anything that isn't a digit as they type, and cap
+  // at 10. The pattern/maxlength on the input are a backstop; this is what
+  // actually stops someone from typing a name into the phone field.
+  const phoneInput = form.querySelector('#rf-phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', () => {
+      phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+    });
+  }
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+
+    // Netlify's notification email body is a fixed plain-text field list we
+    // can't restyle, but the subject line IS whatever this hidden field's
+    // value is — so build something scannable from an inbox list: who, what
+    // device, what's wrong, without needing to open the email.
+    const subjectField = form.querySelector('input[name="subject"]');
+    if (subjectField) {
+      const name = form.querySelector('#rf-name')?.value.trim();
+      const device = form.querySelector('#rf-device')?.value.trim();
+      const issue = form.querySelector('#rf-issue')?.value.trim();
+      const parts = [name, device, issue].filter(Boolean);
+      subjectField.value = parts.length
+        ? `Repair request: ${parts.join(' — ')}`
+        : 'New repair request';
+    }
 
     // Sent as FormData (not URL-encoded) so the optional photo upload comes through —
     // the browser sets the multipart boundary header itself, so don't set Content-Type here.
