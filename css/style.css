@@ -976,6 +976,52 @@ main section h2 {
   font-size: 0.8rem;
 }
 
+.address-autocomplete {
+  position: relative;
+}
+
+.address-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 15rem;
+  overflow-y: auto;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-top: none;
+}
+
+.address-suggestion {
+  padding: 0.65rem 0.9rem;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  cursor: pointer;
+  border-bottom: 1px solid var(--line);
+}
+
+.address-suggestion:last-child {
+  border-bottom: none;
+}
+
+.address-suggestion:hover,
+.address-suggestion[aria-selected='true'] {
+  background: var(--bg-raised);
+  color: var(--accent-strong);
+}
+
+.address-attribution {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-align: right;
+  border-top: 1px solid var(--line);
+}
+
 .repair-form-honeypot {
   position: absolute;
   left: -9999px;

@@ -695,7 +695,20 @@
 
             <div class="form-row form-row--full">
               <label for="rf-address">Pickup address or area</label>
-              <input type="text" id="rf-address" name="address" required />
+              <div class="address-autocomplete">
+                <input
+                  type="text"
+                  id="rf-address"
+                  name="address"
+                  autocomplete="off"
+                  role="combobox"
+                  aria-expanded="false"
+                  aria-controls="rf-address-list"
+                  aria-autocomplete="list"
+                  required
+                />
+                <ul class="address-suggestions" id="rf-address-list" role="listbox" hidden></ul>
+              </div>
             </div>
 
             <div class="form-row form-row--full">
